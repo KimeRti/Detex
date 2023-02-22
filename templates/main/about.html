@@ -1,0 +1,149 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hakkımızda</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    {% include 'main/partials/_libaries.html' %}
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    {% include 'main/partials/_navbar.html' %}
+    <!-- Navbar End -->
+
+    <!-- About Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="row gx-3 h-100">
+                        <div class="col-6 align-self-start wow fadeInUp" data-wow-delay="0.1s">
+                            <img class="img-fluid" src="{% static 'img/about-1.jpg' %}">
+                        </div>
+                        <div class="col-6 align-self-end wow fadeInDown" data-wow-delay="0.1s">
+                            <img class="img-fluid" src="{% static 'img/about-2.jpg' %}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <p class="fw-medium text-uppercase text-primary mb-2">Hakkımızda</p>
+                    <h1 class="display-5 mb-4">We Are Leader In Industrial Market</h1>
+                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="flex-shrink-0 bg-primary p-4">
+                            <h1 class="display-2">25</h1>
+                            <h5 class="text-white">Yıllık</h5>
+                            <h5 class="text-white">Deneyim</h5>
+                        </div>
+                        <div class="ms-4">
+                            <p><i class="fa fa-check text-primary me-2"></i>Power & Energy</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Civil Engineering</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Chemical Engineering</p>
+                            <p><i class="fa fa-check text-primary me-2"></i>Mechanical Engineering</p>
+                            <p class="mb-0"><i class="fa fa-check text-primary me-2"></i>Oil & Gas Engineering</p>
+                        </div>
+                    </div>
+                    <div class="row pt-2">
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-envelope-open text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Mail Gönderin</p>
+                                    <h5 class="mb-0">info@detex.com</h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-phone-alt text-white"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <p class="mb-2">Bizi Arayın</p>
+                                    <h5 class="mb-0">+0212 345 6789</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+
+
+    <!-- Facts Start -->
+    <div class="container-fluid facts my-5 p-5">
+        <div class="row g-5">
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.1s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-certificate fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">25</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Yıllık Deneyim</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.3s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-users-cog fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">135</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Takım Arkadaşı</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.5s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-users fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">957</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Mutlu Müşteri</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-xl-3 wow fadeIn" data-wow-delay="0.7s">
+                <div class="text-center border p-5">
+                    <i class="fa fa-check-double fa-3x text-white mb-3"></i>
+                    <h1 class="display-2 text-primary mb-0" data-toggle="counter-up">1839</h1>
+                    <span class="fs-5 fw-semi-bold text-white">Bitirilmiş Proje</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Facts End -->
+
+    <!-- Video Modal Start -->
+    <div class="modal modal-video fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel">Youtube Video</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- 16:9 aspect ratio -->
+                    <div class="ratio ratio-16x9">
+                        <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Modal End -->
+        
+
+    <!-- Footer Start -->
+    {% include 'main/partials/_footer.html' %}
+    <!-- Footer End -->
+</body>
+
+</html>
