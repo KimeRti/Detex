@@ -59,14 +59,14 @@
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
-                                <tr class="text-white">
+                                <tr>
                                     <th scope="col">Ürün Adı</th>
                                     <th scope="col">Ürün Kategorisi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for products in product  %}
-                                <tr>
+                                <tr class="text-white">
                                     <td>{{ products.product_name }}</td>
                                     <td>{{ products.category.all|join:',' }}</td>
                                     <td><a class="btn btn-sm btn-primary m-2" href="{% url 'editproduct' products.id %}"></i>Düzenle  <i class="bi bi-pencil-square"></i><a class="btn btn-sm btn-danger m-2" href="{% url 'deleteproduct' products.id %}">Sil  <i class="bi bi-trash"></i></a></td>

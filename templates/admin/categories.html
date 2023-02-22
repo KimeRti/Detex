@@ -62,14 +62,14 @@
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
-                                <tr class="text-white">
+                                <tr>
                                     <th scope="col">Kategori Adı</th>
                                     <th scope="col">Parent</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for category in categories  %}
-                                <tr>
+                                <tr class="text-white">
                                     <td>{{ category.name }}</td>
                                     <td>{{ category.parent }}</td>
                                     <td><a class="btn btn-sm btn-primary m-2" href="{% url 'editcategory' category.id %}"></i>Düzenle  <i class="bi bi-pencil-square"></i><a class="btn btn-sm btn-primary m-2" href="{% url 'listproducts' category.id %}">Ürünleri Listele  <i class="bi bi-list-ul"></i></a><a class="btn btn-sm btn-danger m-2" href="{% url 'deletecategory' category.id %}">Sil  <i class="bi bi-trash"></i></a></td>

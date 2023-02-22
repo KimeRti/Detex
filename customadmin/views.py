@@ -117,7 +117,7 @@ def deleteproduct(request,pk):
 def deletecategory(request,pk):
     category = Category.objects.get(id=pk)
     category.delete()
-    return redirect('admincategory')
+    return redirect('categories')
 
 @login_required(login_url="login")
 def listproduct(request,pk):
