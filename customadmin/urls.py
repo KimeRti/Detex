@@ -6,12 +6,15 @@ urlpatterns = [
     path("",views.adminpanelproducts,name="adminproducts"),
     path("categories",views.adminpanelcategory,name="categories"),
     path("users",views.adminpanelusers,name="users"),
+    path("message",views.message,name="message"),
     path("addproduct",views.addproduct,name="addproduct"),
     path("addcategory",views.addcategory,name="addcategory"),
     path("editproduct/<int:pk>",views.editproduct,name="editproduct"),
     path("editcategory/<int:pk>",views.editcategory,name="editcategory"),
     path("deleteproduct/<int:pk>",views.deleteproduct,name="deleteproduct"),
     path("deletecategory/<int:pk>",views.deletecategory,name="deletecategory"),
-    path("listproducts/<int:pk>",views.listproduct,name="listproducts")
+    path("listproducts/<int:pk>",views.listproduct,name="listproducts"),
+    path("profile",views.account,name="profile"),
+    path("changepass",views.changepass,name="changepass"),
 ]
 handler404="main.views.handle_not_found"

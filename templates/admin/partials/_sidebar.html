@@ -12,7 +12,7 @@
         <div class="navbar-nav w-100">
             <a href="{% url 'adminproducts' %}" class="nav-item nav-link {% if url == 'products' %}active{% endif %}"><i class="bi bi-box"></i> Ürünler</a>
             <a href="{% url 'categories' %}" class="nav-item nav-link {% if url == 'category' %}active{% endif %}"><i class="bi bi-tag"></i> Kategoriler</a>
-            <a href="" class="nav-item nav-link"><i class="fa fa-envelope me-lg-2 {% if url == 'messages' %}active{% endif %}"></i>Mesajlar</a>
+            <a href="{% url 'message' %}" class="nav-item nav-link {% if url == 'messages' %}active{% endif %}"><i class="fa fa-envelope me-lg-2"></i>Mesajlar</a>
             <a href="{% url 'users' %}" class="nav-item nav-link {% if url == 'users' %}active{% endif %}"><i class="bi bi-people"></i> Kullanıcılar</a>
             </div>
         </div>

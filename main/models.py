@@ -22,6 +22,6 @@ class Product(models.Model):
     photo9 = models.ImageField(verbose_name='Ürün Fotoğrafı9',null=True)
     photo10 = models.ImageField(verbose_name='Ürün Fotoğrafı10',null=True)
     homepage = models.BooleanField(default=False,verbose_name='Anasayfada Gözüksün')
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category,null=True)
     def __str__(self):
         return self.product_name

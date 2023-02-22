@@ -56,15 +56,16 @@
                 <div class="bg-secondary  rounded p-5">
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-200 p-4">
-                            <h6 class="mb-4">Ürün Ekle</h6>
-                            <form>
+                            <h6 class="mb-4">Kategori Ekle</h6>
+                            <form method="POST">
+                                {% csrf_token %}
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Kategori Adı</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Parent</label>
-                                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input type="number" class="form-control" id="exampleInputEmail1" name="parent">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Kategori Ekle</button>
                             </form>

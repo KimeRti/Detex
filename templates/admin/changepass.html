@@ -50,37 +50,35 @@
             <!-- Navbar Start -->
             {% include 'admin/partials/_navbar.html' %}
             <!-- Navbar End -->
-            <!-- Recent Sales Start -->
+
+            <!-- Form Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Ürünler</h6>
-                        <div>
-                            <a href="{% url 'addproduct' %}" class="btn btn-success m-2">Ürün Ekle  <i class="bi bi-plus-circle"></i></a>
+                <div class="bg-secondary  rounded p-5">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary rounded h-200 p-4">
+                            <h6 class="mb-4">Şifremi Değiştir</h6>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Eski Şifre</label>
+                                    {{form.old_password}}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Yeni Şifre</label>
+                                    {{form.new_password1}}
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Yeni Şifre Tekrar</label>
+                                    {{form.new_password1}}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Güncelle</button>
+                            </form>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-white">
-                                    <th scope="col">Ürün Adı</th>
-                                    <th scope="col">Ürün Kategorisi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for products in product  %}
-                                <tr>
-                                    <td>{{ products.product_name }}</td>
-                                    <td>{{ products.category.all|join:',' }}</td>
-                                    <td><a class="btn btn-sm btn-primary m-2" href="{% url 'editproduct' products.id %}"></i>Düzenle  <i class="bi bi-pencil-square"></i><a class="btn btn-sm btn-danger m-2" href="{% url 'deleteproduct' products.id %}">Sil  <i class="bi bi-trash"></i></a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-            <!-- Recent Sales End -->
+            <!-- Form End -->
+
         <!-- Content End -->
 
 

@@ -57,63 +57,64 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-200 p-4">
                             <h6 class="mb-4">Ürün Ekle</h6>
-                            <form>
+                            <form method="POST">
+                                {% csrf_token %}
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Adı</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label for="product_name" class="form-label">Ürün Adı</label>
+                                    <input type="text" class="form-control" name="product_name" >
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Açıklaması</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <label for="description" class="form-label">Ürün Açıklaması</label>
+                                    <input type="text" class="form-control" name="description" >
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Ürün Kategorisi</label>
-                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <label for="category" class="form-label">Ürün Kategorisi</label>
+                                    <select class="form-select form-select-lg mb-3"  name="category">
                                         <option selected="">Kategori Seçiniz</option>
                                         {% for category in categories %}
-                                        <option value="{{ category.name }}">{{ category.name }}</option>
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 1</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo1">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 2</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo2">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 3</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo3">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 4</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo4">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 5</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo5">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 6</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo6">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 7</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo7">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 8</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo8">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 9</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo9">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 10</label>
-                                    <input class="form-control bg-dark" type="file" id="formFile">
+                                    <input class="form-control bg-dark" type="file" name="photo10">
                                 </div>
                                 <button type="submit" class="btn btn-primary">Ürünü Ekle</button>
                             </form>

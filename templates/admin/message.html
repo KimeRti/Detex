@@ -54,26 +54,26 @@
             <div class="container-fluid pt-4 px-4">
                 <div class="bg-secondary text-center rounded p-4">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Ürünler</h6>
-                        <div>
-                            <a href="{% url 'addproduct' %}" class="btn btn-success m-2">Ürün Ekle  <i class="bi bi-plus-circle"></i></a>
-                        </div>
+                        <h6 class="mb-0">Kullanıcılar</h6>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-start align-middle table-bordered table-hover mb-0">
                             <thead>
                                 <tr class="text-white">
-                                    <th scope="col">Ürün Adı</th>
-                                    <th scope="col">Ürün Kategorisi</th>
+                                    <th scope="col">Kullanıcı Adı</th>
+                                    <th scope="col">Ad</th>
+                                    <th scope="col">SoyAd</th>
+                                    <th scope="col">Son Görülme</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for products in product  %}
-                                <tr>
-                                    <td>{{ products.product_name }}</td>
-                                    <td>{{ products.category.all|join:',' }}</td>
-                                    <td><a class="btn btn-sm btn-primary m-2" href="{% url 'editproduct' products.id %}"></i>Düzenle  <i class="bi bi-pencil-square"></i><a class="btn btn-sm btn-danger m-2" href="{% url 'deleteproduct' products.id %}">Sil  <i class="bi bi-trash"></i></a></td>
-                                </tr>
+                                {% for user in users  %}
+                                    <tr>
+                                        <td><a href="{% url 'start_chat' user %}">{{ user.username }}</a></td>
+                                        <td>{{ user.first_name }}</td>
+                                        <td>{{ user.last_name }}</td>
+                                        <td>{{ user.last_login }}</td>
+                                    </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
