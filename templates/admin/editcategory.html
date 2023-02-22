@@ -50,40 +50,30 @@
             <!-- Navbar Start -->
             {% include 'admin/partials/_navbar.html' %}
             <!-- Navbar End -->
-            <!-- Recent Sales Start -->
+
+            <!-- Form Start -->
             <div class="container-fluid pt-4 px-4">
-                <div class="bg-secondary text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Kategoriler</h6>
-                        <div>
-                            <a href="{% url 'addcategory' %}" class="btn btn-success m-2">Kategori Ekle  <i class="bi bi-plus-circle"></i></a>
-                            <a href="" class="btn btn-danger m-2">Kategori Sil  <i class="bi bi-trash"></i></a>
+                <div class="bg-secondary  rounded p-5">
+                    <div class="col-sm-12 col-xl-6">
+                        <div class="bg-secondary rounded h-200 p-4">
+                            <h6 class="mb-4">Düzenle {{ category.name }}</h6>
+                            <form>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Kategori Adı</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ category.name }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Parent</label>
+                                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ category.parent }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                            </form>
                         </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table text-start align-middle table-bordered table-hover mb-0">
-                            <thead>
-                                <tr class="text-white">
-                                    <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Kategori Adı</th>
-                                    <th scope="col">Parent</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for category in categories  %}
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>{{ category.name }}</td>
-                                    <td>{{ category.parent }}</td>
-                                    <td><a class="btn btn-sm btn-primary m-2" href="{% url 'editcategory' category.id %}"></i>Düzenle  <i class="bi bi-pencil-square"></i><a class="btn btn-sm btn-primary m-2" href="{% url 'listproducts' category.id %}">Ürünleri Listele  <i class="bi bi-list-ul"></i></a><a class="btn btn-sm btn-danger m-2" href="{% url 'deletecategory' category.id %}">Sil  <i class="bi bi-trash"></i></a></td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
-            <!-- Recent Sales End -->
+            <!-- Form End -->
+
         <!-- Content End -->
 
 

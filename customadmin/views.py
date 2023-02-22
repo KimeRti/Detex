@@ -50,6 +50,17 @@ def addproduct(request):
         return render(request,"admin/addproduct.html",data)
     else:
         return redirect('/')
+    
+@login_required(login_url="login")
+def addcategory(request):
+    if request.user.is_superuser == 1:
+        data = {
+            "url":"categories"
+        }
+        return render(request,"admin/addcategory.html",data)
+    else:
+        return redirect('/')
+    
 @login_required(login_url="login")
 def editproduct(request,pk):
     if request.user.is_superuser == 1:
@@ -63,6 +74,35 @@ def editproduct(request,pk):
         return render(request,"admin/editproduct.html",data)
     else:
         return redirect('/')
-def deleteproduct(pk):
-    product = Product.delete(id=pk)
-    Product.save()
+    
+@login_required(login_url="login")
+def editcategory(request,pk):
+    if request.user.is_superuser == 1:
+        category = Category.objects.get(id=pk)
+        data = {
+            "category":category,
+            "url":"products"
+        }
+        return render(request,"admin/editcategory.html",data)
+    else:
+        return redirect('/')
+    
+def deleteproduct(request,pk):
+    product = Product.objects.get(id=pk)
+    product.delete()
+    return redirect('adminproducts')
+
+def deletecategory(request,pk):
+    category = Category.objects.get(id=pk)
+    category.delete()
+    return redirect('admincategory')
+
+@login_required(login_url="login")
+def listproduct(request,pk):
+    category = Category.objects.get(id=pk)
+    products = Product.objects.filter(category=category)
+    data = {
+        "product":products,
+        "category":category
+    }
+    return render(request,"admin/listproducts.html",data)
