@@ -30,19 +30,20 @@
         <div class="container">
             <div class="row g-3" style="justify-content: center;">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    {% for product in products  %}{% endfor %}
+                    {% for product in product  %}
                     <div class="team-item">
                         <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="img/as18.jpg" alt="">
+                            <img class="img-fluid" src="" alt="">
                             <div class="team-social">
-                                <a class="btn btn-square" href="gidatedariki.html#atistirmalik"><i class="bi bi-info-circle-fill"></i></a>
+                                <a class="btn btn-square" href=""><i class="bi bi-info-circle-fill"></i></a>
                             </div>
                         </div>
                         <div class="bg-secondary text-center p-4">
-                            <p style="color:black; font-style: italic;">Matkap Uçları</p>
-                            <h5 >Demir Ucu</h5>
+                            <p style="color:black; font-style: italic;">{{ products.category.all|join:',' }}</p>
+                            <h5 >{{ products.product_name }}</h5>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

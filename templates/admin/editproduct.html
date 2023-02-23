@@ -57,21 +57,27 @@
                     <div class="col-sm-12 col-xl-6">
                         <div class="bg-secondary rounded h-200 p-4">
                             <h6 class="mb-4">Düzenle {{ product.product_name }}</h6>
-                            <form>
+                            <form method="POST">
+                                {% csrf_token %}
+                                {% if error is not null %} 
+                                    <div class="alert alert-danger">
+                                        <h5>{{ error }}</h5>
+                                    </div>
+                                {% endif %}
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Adı</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ product.product_name }}">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="product_name" value="{{ product.product_name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Ürün Açıklaması</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{ product.description }}">
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="description" value="{{ product.description }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputPassword1" class="form-label">Ürün Kategorisi</label>
-                                    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                                    <select class="form-select form-select-lg mb-3" name="category">
                                         <option selected="">{{ product.category.all|join:',' }}</option>
                                         {% for category in categories %}
-                                        <option value="{{ category.name }}">{{ category.name }}</option>
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from main.models import *
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 from django.contrib.auth.models import User
 from .forms import UpdateUserForm
 from django.contrib.auth.forms import PasswordChangeForm
@@ -8,7 +8,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 
 
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def adminpanelproducts(request):
     if request.user.is_superuser == 1:
         product = Product.objects.all()
@@ -20,7 +20,7 @@ def adminpanelproducts(request):
     else:
         return redirect('/')
     
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def adminpanelcategory(request):
     if request.user.is_superuser == 1:
         category = Category.objects.all()
@@ -32,7 +32,7 @@ def adminpanelcategory(request):
     else:
         return redirect('/')
     
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def adminpanelusers(request):
     if request.user.is_superuser == 1:
         users = User.objects.all()
@@ -44,7 +44,7 @@ def adminpanelusers(request):
     else:
         return redirect('/')
     
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def addproduct(request):
     if request.user.is_superuser == 1:
         category = Category.objects.all()
@@ -67,7 +67,7 @@ def addproduct(request):
     else:
         return redirect('/')
     
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def addcategory(request):
     if request.user.is_superuser == 1:
         data = {
@@ -83,7 +83,7 @@ def addcategory(request):
     else:
         return redirect('/')
     
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def editproduct(request,pk):
     if request.user.is_superuser == 1:
         category = Category.objects.all()
@@ -93,11 +93,44 @@ def editproduct(request,pk):
             "product":product,
             "url":"products"
         }
+
+        if request.method == "POST":
+            name = request.POST.get('product_name')
+            description = request.POST.get('description')
+            product_category = request.POST.get('category')
+            if name is None or name == "":
+                return render(request,"admin/editproduct.html",{
+                    "error":"Ürün Adı Boş Bırakılamaz!",
+                    "categories":category,
+                    "product":product,
+                    "url":"products"
+                })
+            if description is None or description == "":
+                return render(request,"admin/editproduct.html",{
+                    "error":"Ürün Açıklaması Boş Bırakılamaz!",
+                    "categories":category,
+                    "product":product,
+                    "url":"products"
+                })
+            if product_category is None or product_category == "":
+                return render(request,"admin/editproduct.html",{
+                    "error":"Kategori Boş Bırakılamaz!",
+                    "categories":category,
+                    "product":product,
+                    "url":"products"
+                })
+            product = Product.objects.get(id=pk)
+            product.product_name = name
+            product.description = description
+            product.save()
+            product.category.set(product_category)
+            return redirect('editproduct',pk)
+
         return render(request,"admin/editproduct.html",data)
     else:
         return redirect('/')
     
-@login_required(login_url="login")
+@login_required(login_url="signin")
 def editcategory(request,pk):
     if request.user.is_superuser == 1:
         category = Category.objects.get(id=pk)
@@ -105,21 +138,44 @@ def editcategory(request,pk):
             "category":category,
             "url":"products"
         }
+        if request.method == "POST":
+            name = request.POST.get('name')
+            parent = request.POST.get('parent')
+            if name is None or name == "":
+                return render(request,"admin/editcategory.html",{
+                    "error":"Kategori Adı Boş Olamaz!",
+                    "category":category,
+                    "url":"products"})
+            if parent is None or parent == "":
+                return render(request,"admin/editcategory.html",{
+                    "error":"Parent Boş Olamaz!",
+                    "category":category,
+                    "url":"products"})
+            category.name = name
+            category.parent = parent
+            category.save()
+            return redirect('editcategory',pk)
+
         return render(request,"admin/editcategory.html",data)
     else:
         return redirect('/')
     
+@login_required(login_url="signin")
+@user_passes_test(lambda u: u.is_superuser)
 def deleteproduct(request,pk):
     product = Product.objects.get(id=pk)
     product.delete()
     return redirect('adminproducts')
 
+@login_required(login_url="signin")
+@user_passes_test(lambda u: u.is_superuser)
 def deletecategory(request,pk):
     category = Category.objects.get(id=pk)
     category.delete()
     return redirect('categories')
 
-@login_required(login_url="login")
+@login_required(login_url="signin")
+@user_passes_test(lambda u: u.is_superuser)
 def listproduct(request,pk):
     category = Category.objects.get(id=pk)
     products = Product.objects.filter(category=category)
@@ -129,7 +185,8 @@ def listproduct(request,pk):
     }
     return render(request,"admin/listproducts.html",data)
 
-@login_required(login_url="login")
+@login_required(login_url="signin")
+@user_passes_test(lambda u: u.is_superuser)
 def message(request):
     users = User.objects.all()
     data={
@@ -138,7 +195,8 @@ def message(request):
     }
     return render(request,"admin/message.html",data)
 
-@login_required(login_url="login")
+@login_required(login_url="signin")
+@user_passes_test(lambda u: u.is_superuser)
 def account(request):
     user_form = UpdateUserForm(request.POST, instance=request.user)
     if request.method == 'POST':
@@ -156,7 +214,8 @@ def account(request):
         return redirect('profile')
     return render(request,"admin/profile.html",{"user_form":user_form})
 
-@login_required(login_url="login")
+@login_required(login_url="signin")
+@user_passes_test(lambda u: u.is_superuser)
 def changepass(request):
     if request.user.is_superuser == True:
         if request.method == "POST":
