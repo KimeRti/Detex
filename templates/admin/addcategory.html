@@ -59,14 +59,12 @@
                             <h6 class="mb-4">Kategori Ekle</h6>
                             <form method="POST">
                                 {% csrf_token %}
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Kategori Adı</label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" name="name">
+                                {% if error is not null %} 
+                                <div class="alert alert-danger">
+                                    <h5>{{ error }}</h5>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Parent</label>
-                                    <input type="number" class="form-control" id="exampleInputEmail1" name="parent">
-                                </div>
+                            {% endif %}
+                                {{ form }}
                                 <button type="submit" class="btn btn-primary">Kategori Ekle</button>
                             </form>
                         </div>

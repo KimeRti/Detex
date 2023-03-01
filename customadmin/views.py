@@ -6,6 +6,7 @@ from .forms import UpdateUserForm
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from .forms import *
 
 
 @login_required(login_url="signin")
@@ -47,38 +48,35 @@ def adminpanelusers(request):
 @login_required(login_url="signin")
 def addproduct(request):
     if request.user.is_superuser == 1:
-        category = Category.objects.all()
-        data = {
-            "categories":category,
-            "url":"products"
-        }
-
-        if request.method == "POST":
-            product_name = request.POST.get('product_name')
-            product_description = request.POST.get('description')
-            product_category = request.POST.get('category')
-            photo1 = request.POST.get('photo1')
-            product = Product.objects.create(product_name=product_name,description=product_description,photo1=photo1)
-            product.save()
-            product.category.set(product_category)
-            return redirect('adminproducts')
-
-        return render(request,"admin/addproduct.html",data)
+        form = ProductForm()
+        if request.method == 'POST':
+            form = ProductForm(request.POST)
+            if form.is_valid():
+                form.save()
+                form = ProductForm()
+            else:
+                form = ProductForm()
+                return render(request,"admin/addproduct.html",{"error":"Ürün Eklenirken Bir Hata Oluştu !","form":form})
+        return render(request,"admin/addproduct.html",{"form":form,"url":"products"})
     else:
         return redirect('/')
     
 @login_required(login_url="signin")
 def addcategory(request):
     if request.user.is_superuser == 1:
+        form = CategoryForm()
         data = {
-            "url":"categories"
+            "url":"categories",
+            "form":form
         }
-        if request.method == "POST":
-            category_name = request.POST.get('name')
-            parent = request.POST.get('parent')
-            category = Category.objects.create(name=category_name,parent=parent)
-            category.save()
-            return redirect('categories')
+        if request.method == 'POST':
+            form = CategoryForm(request.POST)
+            if form.is_valid():
+                form.save()
+                form = CategoryForm()
+            else:
+                form = ProductForm()
+                return render(request,"admin/addcategory.html",{"error":"Kategori Eklenirken Bir Hata Oluştu !"},data)
         return render(request,"admin/addcategory.html",data)
     else:
         return redirect('/')
@@ -86,47 +84,28 @@ def addcategory(request):
 @login_required(login_url="signin")
 def editproduct(request,pk):
     if request.user.is_superuser == 1:
-        category = Category.objects.all()
         product = Product.objects.get(id=pk)
-        data = {
-            "categories":category,
-            "product":product,
-            "url":"products"
-        }
-
-        if request.method == "POST":
-            name = request.POST.get('product_name')
-            description = request.POST.get('description')
-            product_category = request.POST.get('category')
-            if name is None or name == "":
-                return render(request,"admin/editproduct.html",{
-                    "error":"Ürün Adı Boş Bırakılamaz!",
-                    "categories":category,
-                    "product":product,
-                    "url":"products"
-                })
-            if description is None or description == "":
-                return render(request,"admin/editproduct.html",{
-                    "error":"Ürün Açıklaması Boş Bırakılamaz!",
-                    "categories":category,
-                    "product":product,
-                    "url":"products"
-                })
-            if product_category is None or product_category == "":
-                return render(request,"admin/editproduct.html",{
-                    "error":"Kategori Boş Bırakılamaz!",
-                    "categories":category,
-                    "product":product,
-                    "url":"products"
-                })
-            product = Product.objects.get(id=pk)
-            product.product_name = name
-            product.description = description
-            product.save()
-            product.category.set(product_category)
-            return redirect('editproduct',pk)
-
-        return render(request,"admin/editproduct.html",data)
+        form = ProductForm(instance=product)
+        if request.method == 'POST':
+            form = ProductForm(request.POST,instance=product)
+            if form.is_valid():
+                product_name = form.cleaned_data.get('product_name')
+                description = form.cleaned_data.get('description')
+                homepage = form.cleaned_data.get('homepage')
+                #category = form.changed_data.get('category')
+                if product_name == "":
+                    product_name = product.product_name
+                if description == "":
+                    description = product.description
+                product.product_name = product_name
+                product.description = description
+                product.homepage = homepage
+                #product.category = category
+                form.save()
+                form = ProductForm(instance=product)
+            else:
+                return render(request,"admin/editproduct.html",{'error':'Ürün Güncellenirken Bir Hata Oluştu','form':form})
+        return render(request,"admin/editproduct.html",{"form":form})
     else:
         return redirect('/')
     

@@ -59,64 +59,42 @@
                             <h6 class="mb-4">Ürün Ekle</h6>
                             <form method="POST">
                                 {% csrf_token %}
+                                {% if error is not null %} 
+                                <div class="alert alert-danger">
+                                    <h5>{{ error }}</h5>
+                                </div>
+                            {% endif %}
                                 <div class="mb-3">
                                     <label for="product_name" class="form-label">Ürün Adı</label>
-                                    <input type="text" class="form-control" name="product_name" >
+                                    {{ form.product_name }}
                                 </div>
                                 <div class="mb-3">
                                     <label for="description" class="form-label">Ürün Açıklaması</label>
-                                    <input type="text" class="form-control" name="description" >
                                 </div>
+                                {{ form.description }}
                                 <div class="mb-3">
                                     <label for="category" class="form-label">Ürün Kategorisi</label>
-                                    <select class="form-select form-select-lg mb-3"  name="category">
+                                    
+                                    {% comment %} <select class="form-select form-select-lg mb-3"  name="category">
+                                        
                                         <option selected="">Kategori Seçiniz</option>
                                         {% for category in categories %}
                                         <option value="{{ category.id }}">{{ category.name }}</option>
                                         {% endfor %}
-                                    </select>
+                                    </select> {% endcomment %}
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 1</label>
-                                    <input class="form-control bg-dark" type="file" name="photo1">
+                                {{ form.category }}
+                                <br><br>
+                                <div class="row mb-3">
+                                    <legend id="checkbox" class="col-form-label col-sm-2 pt-0">Anasayfada Gözüksün</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            {{ form.homepage }}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 2</label>
-                                    <input class="form-control bg-dark" type="file" name="photo2">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 3</label>
-                                    <input class="form-control bg-dark" type="file" name="photo3">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 4</label>
-                                    <input class="form-control bg-dark" type="file" name="photo4">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 5</label>
-                                    <input class="form-control bg-dark" type="file" name="photo5">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 6</label>
-                                    <input class="form-control bg-dark" type="file" name="photo6">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 7</label>
-                                    <input class="form-control bg-dark" type="file" name="photo7">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 8</label>
-                                    <input class="form-control bg-dark" type="file" name="photo8">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 9</label>
-                                    <input class="form-control bg-dark" type="file" name="photo9">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ürün Fotoğrafı 10</label>
-                                    <input class="form-control bg-dark" type="file" name="photo10">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Ürünü Ekle</button>
+                                {{ form.photo }}
+                                <button type="submit" class="btn btn-primary" id="Btn">Ürünü Ekle</button>
                             </form>
                         </div>
                     </div>
@@ -144,6 +122,19 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'js/adminmain.js' %}"></script>
+    <script src="{% static 'js/product.js' %}"></script>
+    <script type="JavaScript">
+        var Btn = document.qeurySelector('#Btn')
+        var control = document.querySelector('#accept')
+        Btn.addEventListener("click",function(){
+            if(control.checked){
+                control.value = "True"
+            }
+            if(!control.checked){
+                control.value = "False"
+            }
+        })
+    </script>
 </body>
 
 </html>
