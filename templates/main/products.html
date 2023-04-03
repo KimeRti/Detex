@@ -29,22 +29,22 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-3" style="justify-content: center;">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    {% for products in product  %}
-                    <div class="team-item">
-                        <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid" src="{{ products.photo.url }}" alt="">
-                            <div class="team-social">
-                                <a class="btn btn-square" href=""><i class="bi bi-info-circle-fill"></i></a>
+                {% for products in product  %}
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item">
+                            <div class="team-img position-relative overflow-hidden">
+                                <img class="img-fluid" src="{{ products.photo.url }}" alt="">
+                                <div class="team-social">
+                                    <a class="btn btn-square" href=""><i class="bi bi-info-circle-fill"></i></a>
+                                </div>
+                            </div>
+                            <div class="bg-secondary text-center p-4">
+                                <p style="color:black; font-style: italic;">{{ products.category.all|join:',' }}</p>
+                                <h5 >{{ products.product_name }}</h5>
                             </div>
                         </div>
-                        <div class="bg-secondary text-center p-4">
-                            <p style="color:black; font-style: italic;">{{ products.category.all|join:',' }}</p>
-                            <h5 >{{ products.product_name }}</h5>
-                        </div>
                     </div>
-                    {% endfor %}
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
