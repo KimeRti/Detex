@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Industro - Industrial HTML Template</title>
+    <title>İletişim</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -43,7 +43,7 @@
                             <i class="fa fa-envelope-open fa-2x text-primary"></i>
                         </div>
                         <h4 class="mb-3">Email Adresimiz</h4>
-                        <p class="mb-2">detex@example.com</p>
+                        <p class="mb-2">info@detextools.com</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -88,36 +88,41 @@
                                 </div>
                                 <div class="ms-3">
                                     <h6>Mail Gönderin</h6>
-                                    <span>detex@example.com</span>
+                                    <span>info@detextools.com</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <form>
+                    {% if succes %}
+                    <div class="alert alert-success">
+                        <h6> {{ success }} </h6>
+                    {% endif %}
+                    <form method="POST">
+                        {% csrf_token %}
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="İsminiz.">
                                     <label for="name">İsim</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="Emailiniz">
                                     <label for="email">Email</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Konu">
                                     <label for="subject">Konu</label>
                                 </div>
                             </div>
                             <div class="col-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
+                                    <textarea class="form-control" name="message" placeholder="Leave a message here" id="message" style="height: 150px"></textarea>
                                     <label for="message">Mesaj</label>
                                 </div>
                             </div>
