@@ -14,7 +14,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-$=hsly6gc_zq)sq*5=vqy#8)ju9=6z=p#qv!#f2zry2(dck5@('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -62,7 +62,7 @@ ROOT_URLCONF = 'detex.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, '../../templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -90,23 +90,7 @@ CHANNEL_LAYERS = {
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-
-        'NAME': 'detexnew',
-
-        'USER': 'postgres',
-
-        'PASSWORD': '123',
-
-        'HOST': 'localhost',
-
-        'PORT': '5432',
-
-    }
-}
 
 
 # Password validation
@@ -145,11 +129,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [
-     os.path.join(BASE_DIR,'static')
-     ]
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '../../media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -158,9 +139,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.outlook.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'merterli_ahmet20@outlook.com'
-EMAIL_HOST_PASSWORD = '11251125aAaa'
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'merterli_ahmet20@outlook.com'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'info@detextools.com'
+EMAIL_HOST_PASSWORD = 'detexinfo123'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = 'info@detextools.com'
