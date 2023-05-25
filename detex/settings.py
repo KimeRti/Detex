@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-$=hsly6gc_zq)sq*5=vqy#8)ju9=6z=p#qv!#f2zry2(dck5@(
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['45.147.46.199']
 
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -96,11 +96,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'detexnew',
+        'NAME': 'detex',
 
-        'USER': 'postgres',
+        'USER': 'detexuser',
 
-        'PASSWORD': '123',
+        'PASSWORD': 'detex123',
 
         'HOST': 'localhost',
 

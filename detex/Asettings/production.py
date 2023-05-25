@@ -9,11 +9,11 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'NAME': 'detexnew',
+        'NAME': 'detex',
 
-        'USER': 'postgres1',
+        'USER': 'detexuser',
 
-        'PASSWORD': '123',
+        'PASSWORD': 'detex123',
 
         'HOST': 'localhost',
 
