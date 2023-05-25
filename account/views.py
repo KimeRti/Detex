@@ -88,6 +88,12 @@ def activate(request, uidb64, token):
         return render(request, 'account/email.html', {"error": "Aktivasyon linki geçersiz!", 'errorr': True})
 
 
+def account(requset):
+    if requset.user.is_authenticated:
+        return render(requset, 'account/account.html',{'url': 'account'})
+    else:
+        return render(requset, 'main/404.html')
+
 def password_reset_request(request):
     if request.method == "POST":
         password_reset_form = PasswordResetForm(request.POST)

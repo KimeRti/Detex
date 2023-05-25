@@ -11,6 +11,7 @@ urlpatterns = [
     path("password_reset", views.password_reset_request, name="password_reset"),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='account/password_reset_done.html'), name='password_reset_done'),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='account/password_reset_complete.html'), name='password_reset_confirm'),
+    path('account', views.account, name="account"),
 ]
 
 handler404 = "main.views.handle_not_found"

@@ -27,7 +27,7 @@
 	function Owl(element, options) {
 
 		/**
-		 * Current settings for the carousel.
+		 * Current Asettings for the carousel.
 		 * @public
 		 */
 		this.settings = null;
@@ -496,7 +496,7 @@
 	};
 
 	/**
-	 * Setups the current settings.
+	 * Setups the current Asettings.
 	 * @todo Remove responsive classes. Why should adaptive designs be brought into IE8?
 	 * @todo Support for media queries by using `matchMedia` would be nice.
 	 * @public

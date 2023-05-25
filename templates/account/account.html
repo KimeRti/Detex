@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hesap Ayarları</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+    {% include 'main/partials/_libaries.html' %}
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+   {% include 'main/partials/_navbar.html' %}
+
+    <!-- Account Settings Start -->
+    <section id="account-settings" class="bg-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Hesap Ayarları</h5>
+                            <ul class="nav flex-column nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="profile-tab" data-bs-toggle="pill" href="#profile">Profil</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="security-tab" data-bs-toggle="pill" href="#security">Güvenlik</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="profile">
+                        <div id="profile-info">
+                            <h4>Profil Bilgileri</h4>
+                            <p>Kullanıcı Adı: <span id="phoneNumber">{{ request.user.username }}</span></p>
+                            <p>Adınız Soyadınız: <span id="fullName">{{ request.user.first_name|title }} {{ request.user.last_name|title }}</span></p>
+                            <p>E-posta Adresiniz: <span id="email">{{ request.user.email }}</span></p>
+                            <button class="btn btn-primary" onclick="editProfile()">Düzenle</button>
+                        </div>
+                        <div id="profile-form" style="display: none;">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="fullNameInput" class="form-label">Kullanıcı Adınız</label>
+                                    <input type="text" class="form-control" id="fullNameInput" value="{{ request.user.username }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fullNameInput" class="form-label">Adınız Soyadınız</label>
+                                    <input type="text" class="form-control" id="fullNameInput" value="{{ request.user.first_name|title }} {{ request.user.last_name|title }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="emailInput" class="form-label">E-posta Adresiniz</label>
+                                    <input type="email" class="form-control" id="emailInput" value="{{ request.user.email }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                                <button class="btn btn-secondary" onclick="cancelEdit()">İptal</button>
+                            </form>
+                        </div>
+                    </div>
+                        <div class="tab-pane fade" id="security">
+                            <form>
+                                <div class="mb-3">
+                                    <label for="currentPassword" class="form-label">Mevcut Şifreniz</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="newPassword" class="form-label">Yeni Şifreniz</label>
+                                    <input type="password" class="form-control" id="newPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Yeni Şifre Tekrar</label>
+                                    <input type="password" class="form-control" id="confirmPassword">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Değiştir</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Account Settings End -->
+    <script>
+        function editProfile() {
+            document.getElementById('profile-info').style.display = 'none';
+            document.getElementById('profile-form').style.display = 'block';
+        }
+    
+        function cancelEdit() {
+            document.getElementById('profile-info').style.display = 'block';
+            document.getElementById('profile-form').style.display = 'none';
+        }
+    </script>
+<!-- Footer Start -->
+    {% include 'main/partials/_footer.html' %}
+
+</body>
+
+</html>
