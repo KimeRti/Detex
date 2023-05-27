@@ -2,7 +2,7 @@ from .base import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['detextools.com', 'www.detextools.com']
+ALLOWED_HOSTS = ['45.147.46.199', 'detextools.com', 'www.detextools.com']
 
 DATABASES = {
     'default': {
@@ -22,7 +22,7 @@ DATABASES = {
     }
 }
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
