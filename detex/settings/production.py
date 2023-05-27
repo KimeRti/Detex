@@ -4,6 +4,17 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['45.147.46.199', 'detextools.com', 'www.detextools.com']
 
+CORS_ALLOWED_ORIGINS = ["http://detextools.com", "http://www.detextools.com", 'http://45.147.46.199']
+
+CORS_ORIGIN_WHITELIST = (
+
+    'detextools.com',
+    'www.detextools.com',
+    '45.147.46.199',
+)
+
+CSRF_TRUSTED_ORIGINS = ['http://detextools.com']
+
 DATABASES = {
     'default': {
 
