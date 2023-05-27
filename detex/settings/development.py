@@ -1,8 +1,8 @@
 from .base import *
 
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['45.147.46.199', 'detextools.com', 'www.detextools.com']
+ALLOWED_HOSTS = []
 
 DATABASES = {
     'default': {
