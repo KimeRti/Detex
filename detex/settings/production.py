@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['45.147.46.199', 'detextools.com', 'www.detextools.com']
 
