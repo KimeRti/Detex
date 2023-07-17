@@ -1,16 +1,69 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <!DOCTYPE html>
     <html lang="en">
-    
+   
     <head>
         <meta charset="utf-8">
         <title>Ürünlerimiz</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
-    
+   
+        <!-- Favicon -->
         {% include 'main/partials/_libaries.html' %}
+        <style>
+            /* Seçili kategori için aktif durumun stilini belirt */
+            .list-group-item.active {
+                background-color: #ffffff;
+                color: #000000;
+                font-weight: bold;
+            }
+            
+            /* Alt kategoriler için farklı bir arka plan rengi ve imleç stilini belirt */
+            .list-group-item.sub-category {
+                background-color: #ffffff;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            
+            /* Seçili alt kategori için stil değişikliği yap */
+            .list-group-item.sub-category.active,
+            .list-group-item.sub-category:hover {
+                background-color: #0058af;
+            }
+            
+            /* Tıklanan alt kategori için stil değişikliği yap */
+            .list-group-item.sub-category:active {
+                background-color: #0058af !important;
+            }                                         
+            
+            /* Menü stil tanımlamaları */
+            li.menu {
+                display: flex;
+                align-items: center;
+                padding: 10px;
+                border-bottom: 1px solid #e5e5e5;
+            }
+            
+            li.menu:last-child {
+                border-bottom: none;
+            }
+            
+            li.menu .category-icon {
+                margin-right: 10px;
+            }
+            
+        </style>
+       
+       
+       
+       
+       
+       
+       
+       
     </head>
 <body>
     <!-- Spinner Start -->
@@ -22,11 +75,62 @@
     <!-- Navbar Start -->
     {% include 'main/partials/_navbar.html' %}
     <!-- Navbar End -->
-    <br><br>
-    <div class="wow fadeInUp" style="justify-content: center; align-items: center; text-align: center; margin-top: 30px;" data-wow-delay="0.5s"><h1 class="heading" style="color: #004e90;;">Ürünlerimiz</h1></div><br><br>
-    <br><br>
-    <!-- Products Start -->
-    <div class="container-xxl py-5">
+   
+    <!-- Page Header Start -->
+    <div class="page-header bg-primary-gradient">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-7">
+                    <div class="text-center">
+                        <br>
+                        <h1 class="text-white mb-0">Ürünlerimiz</h1>
+                        <p class="lead text-white">Detex Tools</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br> <br>
+    <!-- Page Header End -->
+
+<!-- Products Start -->
+<section class="section">
+<div class="container">
+    <div class="row">
+        <!-- Category Menu Start -->
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Kategoriler</h5>
+                </div>
+
+                <ul class="list-group list-group-flush">
+                    {% for category in categories %}
+                    <li class="list-group-item">
+                        {{ category.name }}
+                        <ul class="sub-categories">
+                            <br>
+                            {% for subcategory in category.subcategories.all %}
+                                {% if subcategory.category.id == category.id %}
+                                    <li class="list-group-item sub-category" data-category="{{ category.name }}-{{ subcategory.name }}">{{ subcategory.name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+            <!-- Category Menu End -->
+
+
+<div class="container-xxl py-5">
         <div class="container">
             <div class="row g-3" style="justify-content: center;">
                 {% for products in product  %}
@@ -47,11 +151,60 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
-    <!-- Products End -->
+    </div>s
+
+</section>
+<!-- Products End -->
+  
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Kategori değiştiğinde tetiklenecek olay
+    $('li[data-category]').click(function() {
+      var category = $(this).data('category');
+      // Tüm ürünleri gizle
+      $('.row.products').hide();
+      // Seçili kategoriye ait ürünleri göster
+      $('.row.products[data-category="' + category + '"]').show();
+
+      // Aktif alt kategoriyi güncelle
+      $('li[data-category^="kategori"]').removeClass('active');
+      $(this).addClass('active');
+    });
+
+    // Alt kategori değiştiğinde tetiklenecek olay
+    $('li[data-category^="kategori"]').click(function() {
+      var category = $(this).data('category');
+      // Tüm ürünleri gizle
+      $('.row.products').hide();
+      // Seçili alt kategoriye ait ürünleri göster
+      $('.row.products[data-category^="' + category + '"]').show();
+
+      // Aktif alt kategoriyi güncelle
+      $('li[data-category^="kategori"]').removeClass('active');
+      $(this).addClass('active');
+    });
+  });
+
+  $(document).ready(function() {
+    // Menü üzerine gelindiğinde tetiklenecek olay
+    $('li.menu').hover(
+      function() {
+        $(this).addClass('active');
+      },
+      function() {
+        $(this).removeClass('active');
+      }
+    );
+  });
+</script>
+
 
     <!-- Footer Start -->
     {% include 'main/partials/_footer.html' %}
     <!-- Footer End -->
+
+
 </body>
 </html>

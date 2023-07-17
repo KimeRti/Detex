@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Product
+from .models import *
 from django.contrib.auth.models import User
 from account.models import Messages
 
@@ -44,10 +44,14 @@ def contact(request):
 
 def products(request):
     products = Product.objects.all()
+    category = Category.objects.all()
+    subcategory = SubCategory.objects.all()
     url = 'products'
     data = {
         "product": products,
-        "url": url
+        "categories": category,
+        "url": url,
+        "subcategories": subcategory
     }
     return render(request, "main/products.html", data)
 

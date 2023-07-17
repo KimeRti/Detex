@@ -9,9 +9,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
-from main.models import Product
 from .token import account_activation_token
-from pprint import pprint
 
 
 def signin(request):
